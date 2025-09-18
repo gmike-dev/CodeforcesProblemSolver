@@ -37,8 +37,8 @@ public class StringsTests
   [Test]
   public void KmpMatchAllTest()
   {
-    Match.KmpMatchAll("abcabcd", "abc").Should().BeEquivalentTo(0, 3);
-    Match.KmpMatchAll("abababab", "aba").Should().BeEquivalentTo(0, 2, 4);
+    Match.KmpMatchAll("abcabcd", "abc").Should().BeEquivalentTo([0, 3]);
+    Match.KmpMatchAll("abababab", "aba").Should().BeEquivalentTo([0, 2, 4]);
   }
 
   private static void CheckMatch(Func<string, string, int> match)

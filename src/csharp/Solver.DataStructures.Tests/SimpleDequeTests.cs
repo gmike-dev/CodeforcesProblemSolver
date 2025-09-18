@@ -13,10 +13,11 @@ public class SimpleDequeTests
       d.Back.Should().Be(i);
       d.Front.Should().Be(0);
     }
+
     d.Front.Should().Be(0);
     d.Back.Should().Be(9);
   }
-    
+
   [Test]
   public void PushFront()
   {
@@ -27,10 +28,11 @@ public class SimpleDequeTests
       d.Back.Should().Be(0);
       d.Front.Should().Be(i);
     }
+
     d.Front.Should().Be(9);
     d.Back.Should().Be(0);
   }
-    
+
   [Test]
   public void PushPop()
   {
@@ -58,7 +60,7 @@ public class SimpleDequeTests
     d.Front.Should().Be(9);
     d.Back.Should().Be(10);
   }
-    
+
   [Test]
   public void ToArray()
   {
@@ -66,14 +68,14 @@ public class SimpleDequeTests
     d.ToArray().Should().BeEmpty();
     for (int i = 1; i <= 3; i++)
       d.PushFront(i);
-    d.ToArray().Should().BeEquivalentTo(1, 2, 3);
+    d.ToArray().Should().BeEquivalentTo([1, 2, 3]);
     for (int i = 4; i <= 6; i++)
       d.PushBack(i);
-    d.ToArray().Should().BeEquivalentTo(1, 2, 3, 4, 5, 6);
+    d.ToArray().Should().BeEquivalentTo([1, 2, 3, 4, 5, 6]);
     for (int i = 1; i <= 4; i++)
       d.PopFront();
-    d.ToArray().Should().BeEquivalentTo(5, 6);
+    d.ToArray().Should().BeEquivalentTo([5, 6]);
     d.PopBack();
-    d.ToArray().Should().BeEquivalentTo(5);
+    d.ToArray().Should().BeEquivalentTo([5]);
   }
 }
