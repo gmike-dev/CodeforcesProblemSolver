@@ -7,48 +7,61 @@ import (
 	"os"
 )
 
-func (s *solver) solveCase() {
+func (sv *solver) solveCase() {
 }
 
-func (s *solver) solve() {
-	var t int
-	for s.scanln(&t); t > 0; t-- {
-		s.solveCase()
+func (sv *solver) solve() {
+	for range sv.readInt() {
+		sv.solveCase()
 	}
 }
 
-func (s *solver) write(a ...any) {
-	fmt.Fprint(s.output, a...)
-}
+func (sv *solver) writelnStrArr(a []string) { writeArr(sv, a) }
 
-func (s *solver) writeln(a ...any) {
-	fmt.Fprintln(s.output, a...)
-}
+func (sv *solver) writelnIntArr(a []int) { writeArr(sv, a) }
 
-func (s *solver) scan(a ...any) {
-	fmt.Fscan(s.input, a...)
-}
+func (sv *solver) writelnInt64Arr(a []int64) { writeArr(sv, a) }
 
-func (s *solver) scanln(a ...any) {
-	fmt.Fscanln(s.input, a...)
-}
+func (sv *solver) write(a ...any) { fmt.Fprint(sv.output, a...) }
 
-func (s *solver) readInt() int {
+func (sv *solver) writeln(a ...any) { fmt.Fprintln(sv.output, a...) }
+
+func (sv *solver) scan(a ...any) { fmt.Fscan(sv.input, a...) }
+
+func (sv *solver) scanln(a ...any) { fmt.Fscanln(sv.input, a...) }
+
+func (sv *solver) readInt() int {
 	var a int
-	fmt.Fscan(s.input, &a)
+	fmt.Fscan(sv.input, &a)
 	return a
 }
 
-func (s *solver) read2Int() (int, int) {
+func (sv *solver) read2Int() (int, int) {
 	var a, b int
-	fmt.Fscan(s.input, &a, &b)
+	fmt.Fscan(sv.input, &a, &b)
 	return a, b
 }
 
-func (s *solver) read3Int() (int, int, int) {
+func (sv *solver) read3Int() (int, int, int) {
 	var a, b, c int
-	fmt.Fscan(s.input, &a, &b, &c)
+	fmt.Fscan(sv.input, &a, &b, &c)
 	return a, b, c
+}
+
+func (sv *solver) readIntArray(n int) []int {
+	res := make([]int, n)
+	for i := 0; i < n; i++ {
+		sv.scan(&res[i])
+	}
+	return res
+}
+
+func writeArr[T any](s *solver, a []T) {
+	for i := range a {
+		s.write(a[i])
+		s.write(" ")
+	}
+	s.writeln()
 }
 
 type solver struct {
