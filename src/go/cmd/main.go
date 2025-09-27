@@ -10,6 +10,13 @@ import (
 func (sv *solver) solveCase() {
 }
 
+func abs(a int) int {
+	if a < 0 {
+		return -a
+	}
+	return a
+}
+
 func (sv *solver) solve() {
 	for range sv.readInt() {
 		sv.solveCase()
@@ -57,9 +64,12 @@ func (sv *solver) readIntArray(n int) []int {
 }
 
 func writeArr[T any](s *solver, a []T) {
-	for i := range a {
-		s.write(a[i])
-		s.write(" ")
+	n := len(a)
+	for i, x := range a {
+		s.write(x)
+		if i+1 < n {
+			s.write(" ")
+		}
 	}
 	s.writeln()
 }

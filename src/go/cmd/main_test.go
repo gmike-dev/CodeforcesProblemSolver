@@ -9,7 +9,7 @@ import (
 )
 
 func Test1(t *testing.T) {
-	check(t, "", "")
+	check(t, ``, ``)
 }
 
 func check(t *testing.T, input string, expected string) {
