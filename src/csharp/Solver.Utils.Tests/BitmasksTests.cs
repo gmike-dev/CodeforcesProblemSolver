@@ -80,7 +80,7 @@ public class BitmasksTests
   {
     Bitmasks.Lso(n).Should().Be(expected);
   }
-  
+
   [TestCase(0b1001011100u, 0b100u)]
   [TestCase(0u, 0u)]
   [TestCase(1u, 1u)]
@@ -105,13 +105,59 @@ public class BitmasksTests
   }
 
   [TestCase(0, 0)]
-  [TestCase(1,1)]
-  [TestCase(2,1)]
-  [TestCase(619874,1)]
-  [TestCase(int.MaxValue,1)]
-  [TestCase(int.MinValue,1)]
+  [TestCase(1, 1)]
+  [TestCase(2, 1)]
+  [TestCase(619874, 1)]
+  [TestCase(int.MaxValue, 1)]
+  [TestCase(int.MinValue, 1)]
   public void IsNotZeroTests(int n, int expected)
   {
     Bitmasks.IsNotZero(n).Should().Be(expected);
+  }
+
+  [TestCase(0b0000u, 0b0000u)]
+  [TestCase(0b0001u, 0b0001u)]
+  [TestCase(0b0010u, 0b0011u)]
+  [TestCase(0b0011u, 0b0010u)]
+  [TestCase(0b0100u, 0b0110u)]
+  [TestCase(0b0101u, 0b0111u)]
+  [TestCase(0b0110u, 0b0101u)]
+  [TestCase(0b0111u, 0b0100u)]
+  [TestCase(0b1000u, 0b1100u)]
+  [TestCase(0b1001u, 0b1101u)]
+  [TestCase(0b1010u, 0b1111u)]
+  [TestCase(0b1011u, 0b1110u)]
+  [TestCase(0b1100u, 0b1010u)]
+  [TestCase(0b1101u, 0b1011u)]
+  [TestCase(0b1110u, 0b1001u)]
+  [TestCase(0b1111u, 0b1000u)]
+  [TestCase(0b11111111111111111111111111111110u, 0b10000000000000000000000000000001u)]
+  [TestCase(0b11111111111111111111111111111111u, 0b10000000000000000000000000000000u)]
+  public void BinaryToGrayTest(uint n, uint expected)
+  {
+    Bitmasks.BinaryToGray(n).Should().Be(expected);
+  }
+
+  [TestCase(0b0000u, 0b0000u)]
+  [TestCase(0b0001u, 0b0001u)]
+  [TestCase(0b0011u, 0b0010u)]
+  [TestCase(0b0010u, 0b0011u)]
+  [TestCase(0b0110u, 0b0100u)]
+  [TestCase(0b0111u, 0b0101u)]
+  [TestCase(0b0101u, 0b0110u)]
+  [TestCase(0b0100u, 0b0111u)]
+  [TestCase(0b1100u, 0b1000u)]
+  [TestCase(0b1101u, 0b1001u)]
+  [TestCase(0b1111u, 0b1010u)]
+  [TestCase(0b1110u, 0b1011u)]
+  [TestCase(0b1010u, 0b1100u)]
+  [TestCase(0b1011u, 0b1101u)]
+  [TestCase(0b1001u, 0b1110u)]
+  [TestCase(0b1000u, 0b1111u)]
+  [TestCase(0b10000000000000000000000000000001u, 0b11111111111111111111111111111110u)]
+  [TestCase(0b10000000000000000000000000000000u, 0b11111111111111111111111111111111)]
+  public void GrayToBinaryTest(uint n, uint expected)
+  {
+    Bitmasks.GrayToBinary(n).Should().Be(expected);
   }
 }

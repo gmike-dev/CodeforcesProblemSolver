@@ -13,6 +13,7 @@ public static class Bitmasks
       n &= (n - 1);
       count++;
     }
+
     return count;
   }
 
@@ -32,6 +33,7 @@ public static class Bitmasks
       result = (result << 1) | (n & 1);
       n >>= 1;
     }
+
     return result;
   }
 
@@ -75,7 +77,7 @@ public static class Bitmasks
   {
     return n == 0 ? 0 : 1u << BitOperations.Log2(n);
   }
-  
+
   /// <summary>
   /// Return least significant 1-bit (LSb).
   /// </summary>
@@ -86,7 +88,7 @@ public static class Bitmasks
   {
     return n & -n;
   }
-  
+
   /// <summary>
   /// Return least significant 1-bit (LSb).
   /// </summary>
@@ -108,7 +110,7 @@ public static class Bitmasks
   {
     return LargestPower2(n);
   }
-  
+
   /// <remarks>Same as <see cref="BitOperations.IsPow2(int)"/></remarks>
   public static bool IsPowerOfTwo(int n)
   {
@@ -126,5 +128,30 @@ public static class Bitmasks
   public static int IsNotZero(int n)
   {
     return (n | (~n + 1)) >> 31 & 1;
+  }
+
+  /// <summary>
+  /// Converts an unsigned binary number to reflected binary Gray code. 
+  /// </summary>
+  /// <returns>Gray code for <paramref name="n"/></returns>
+  /// <remarks>https://en.wikipedia.org/wiki/Gray_code</remarks>
+  public static uint BinaryToGray(uint n)
+  {
+    return n ^ (n >> 1);
+  }
+
+  /// <summary>
+  /// Convert a reflected binary Gray code number to a binary number.
+  /// </summary>
+  public static uint GrayToBinary(uint num)
+  {
+    uint mask = num;
+    while (mask != 0)
+    {
+      mask >>= 1;
+      num ^= mask;
+    }
+
+    return num;
   }
 }
