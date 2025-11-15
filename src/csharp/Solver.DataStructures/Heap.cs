@@ -5,7 +5,7 @@ public static class Heap
   public static void Build(int[] a)
   {
     var n = a.Length;
-    for (int i = n / 2 - 1; i >= 0; i--)
+    for (var i = n / 2 - 1; i >= 0; i--)
     {
       PushDown(a, i, n);
     }
@@ -14,7 +14,7 @@ public static class Heap
   public static void Sort(int[] a)
   {
     Build(a);
-    for (int i = a.Length - 1; i > 0; i--)
+    for (var i = a.Length - 1; i > 0; i--)
     {
       (a[i], a[0]) = (a[0], a[i]);
       PushDown(a, 0, i);
@@ -23,8 +23,8 @@ public static class Heap
 
   public static void Build<T>(T[] a, Comparison<T> comparer)
   {
-    int n = a.Length;
-    for (int i = n >> 1; i >= 1; i--)
+    var n = a.Length;
+    for (var i = n >> 1; i >= 1; i--)
     {
       DownHeap(a, i, n, comparer);
     }
@@ -34,8 +34,8 @@ public static class Heap
   {
     comparer ??= Comparer<T>.Default.Compare;
     Build(a, comparer);
-    int n = a.Length;
-    for (int i = n; i > 1; i--)
+    var n = a.Length;
+    for (var i = n; i > 1; i--)
     {
       (a[0], a[i - 1]) = (a[i - 1], a[0]);
       DownHeap(a, 1, i - 1, comparer);
@@ -44,10 +44,10 @@ public static class Heap
 
   public static void DownHeap<T>(Span<T> a, int i, int n, Comparison<T> comparer)
   {
-    T d = a[i - 1];
+    var d = a[i - 1];
     while (i <= n >> 1)
     {
-      int child = 2 * i;
+      var child = 2 * i;
       if (child < n && comparer(a[child - 1], a[child]) < 0)
       {
         child++;
@@ -62,24 +62,24 @@ public static class Heap
 
     a[i - 1] = d;
   }
-    
+
   public static void UpHeap<T>(Span<T> a, int i, int n, Comparison<T> comparer)
   {
     while (i > 0)
     {
-      int p = (i - 1) >> 1;
+      var p = (i - 1) >> 1;
       if (comparer(a[i], a[p]) >= 0)
         break;
       (a[p], a[i]) = (a[i], a[p]);
       i = p;
     }
   }
-    
+
   private static void PushUp(Span<int> a, int i)
   {
     while (i > 0)
     {
-      int p = (i - 1) >> 1;
+      var p = (i - 1) >> 1;
       if (a[p] >= a[i])
         break;
       (a[p], a[i]) = (a[i], a[p]);
@@ -91,17 +91,17 @@ public static class Heap
   {
     while (true)
     {
-      var largest = i;
-      int l = (i << 1) + 1; /* 2*id + 1 */
-      int r = (i + 1) << 1; /* 2*id + 2 */
-      if (l < n && a[l] > a[largest])
-        largest = l;
-      if (r < n && a[r] > a[largest])
-        largest = r;
-      if (largest == i)
+      var l = 2 * i + 1;
+      if (l >= n)
         break;
-      (a[largest], a[i]) = (a[i], a[largest]);
-      i = largest;
+      var largestChild = l;
+      var r = l + 1;
+      if (r < n && a[r] > a[largestChild])
+        largestChild = r;
+      if (a[largestChild] <= a[i])
+        break;
+      (a[largestChild], a[i]) = (a[i], a[largestChild]);
+      i = largestChild;
     }
   }
 }
