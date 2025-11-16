@@ -7,6 +7,8 @@
 - Two pointers
 - Binary search (lower/upper bound)
 - Bitmasks
+- Sqrt decomposition
+  - Mo's algorithm (answer queries)
 
 # DS
 - Arrays, strings, linked lists, hashmaps (dictionaries)
