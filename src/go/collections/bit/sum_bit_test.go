@@ -18,12 +18,12 @@ func TestSumBit(t *testing.T) {
 	assert.Equal(t, 4+5, f.Sum(3, 4))
 }
 
-func TestSumBitUpdate(t *testing.T) {
+func TestSumBitAdd(t *testing.T) {
 	f := NewSumBit(5)
 	arr := []int{1, 2, 3, 4, 5}
 	f.Build(arr)
 
-	f.Update(2, 10)
+	f.Add(2, 10)
 
 	assert.Equal(t, 13, f.Sum(2, 2))
 	assert.Equal(t, 2+13+4, f.Sum(1, 3))
