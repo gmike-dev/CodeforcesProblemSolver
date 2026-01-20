@@ -160,4 +160,16 @@ public class BitmasksTests
   {
     Bitmasks.GrayToBinary(n).Should().Be(expected);
   }
+
+  [Test]
+  public void InvertCaseTest()
+  {
+    for (int i = 0; i < 26; i++)
+    {
+      var c = (char)('a' + i);
+      Bitmasks.InvertCase(c).Should().Be(char.ToUpper(c));
+      c = (char)('A' + i);
+      Bitmasks.InvertCase(c).Should().Be(char.ToLower(c));
+    }
+  }
 }

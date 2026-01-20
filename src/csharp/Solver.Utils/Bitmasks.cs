@@ -154,4 +154,9 @@ public static class Bitmasks
 
     return num;
   }
+
+  /// <summary>
+  /// Invert case of ASCII character.
+  /// </summary>
+  public static char InvertCase(char c) => (char)(c ^ 32);
 }
