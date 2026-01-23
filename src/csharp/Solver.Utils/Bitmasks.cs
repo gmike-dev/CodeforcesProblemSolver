@@ -24,6 +24,19 @@ public static class Bitmasks
   {
     return BitOperations.PopCount(n);
   }
+  
+  /// <summary>
+  /// Number of 1 Bits.
+  /// </summary>
+  public static int HammingWeight3(uint n)
+  {
+    n = (n & 0x55555555) + ((n >> 1) & 0x55555555);
+    n = (n & 0x33333333) + ((n >> 2) & 0x33333333);
+    n = (n & 0x0F0F0F0F) + ((n >> 4) & 0x0F0F0F0F);
+    n = (n & 0x00FF00FF) + ((n >> 8) & 0x00FF00FF);
+    n = (n & 0x0000FFFF) + ((n >> 16) & 0x0000FFFF);
+    return (int)n;
+  }
 
   public static uint ReverseBits(uint n)
   {
@@ -39,11 +52,11 @@ public static class Bitmasks
 
   public static uint ReverseBits2(UInt32 n)
   {
-    n = ((n & 0xaaaaaaaa) >> 1) | ((n & 0x55555555) << 1);
-    n = ((n & 0xcccccccc) >> 2) | ((n & 0x33333333) << 2);
-    n = ((n & 0xf0f0f0f0) >> 4) | ((n & 0x0f0f0f0f) << 4);
-    n = ((n & 0xff00ff00) >> 8) | ((n & 0x00ff00ff) << 8);
-    n = ((n & 0xffff0000) >> 16) | ((n & 0x0000ffff) << 16);
+    n = ((n & 0xAAAAAAAA) >> 1) | ((n & 0x55555555) << 1);
+    n = ((n & 0xCCCCCCCC) >> 2) | ((n & 0x33333333) << 2);
+    n = ((n & 0xF0F0F0F0) >> 4) | ((n & 0x0F0F0F0F) << 4);
+    n = ((n & 0xFF00FF00) >> 8) | ((n & 0x00FF00FF) << 8);
+    n = ((n & 0xFFFF0000) >> 16) | ((n & 0x0000FFFF) << 16);
     return n;
   }
 

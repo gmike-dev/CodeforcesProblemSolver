@@ -34,6 +34,7 @@ public class BitmasksTests
   {
     Bitmasks.HammingWeight(n).Should().Be(expected);
     Bitmasks.HammingWeight2(n).Should().Be(expected);
+    Bitmasks.HammingWeight3(n).Should().Be(expected);
   }
 
   [TestCase(1, true)]
