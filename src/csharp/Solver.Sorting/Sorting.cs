@@ -9,17 +9,17 @@ public static class Sorting
   {
     Heap.Sort(a);
   }
-    
+
   public static void HeapSort<T>(T[] a, Comparison<T> comparer)
   {
     Heap.Sort(a, comparer);
   }
-    
+
   public static void QuickSort(int[] a)
   {
     QuickSortHoare(a, 0, a.Length - 1);
   }
-    
+
   /// <remarks>На отсортированном массиве ведёт себя паршиво.</remarks>
   public static void QuickSortLomuto(int[] a)
   {
@@ -133,6 +133,47 @@ public static class Sorting
         }
       }
     }
+  }
+
+  public static void RadixSort(int[] array)
+  {
+    var n = array.Length;
+    var unsigned = new uint[n];
+    for (var i = 0; i < n; i++)
+      unsigned[i] = (uint)(array[i] ^ 0x80000000);
+
+    for (var shift = 0; shift < 32; shift += 8)
+      CountingSortByByte(unsigned, shift);
+
+    for (var i = 0; i < n; i++)
+      array[i] = (int)(unsigned[i] ^ 0x80000000);
+  }
+  
+  public static void RadixSort(uint[] array)
+  {
+    for (var shift = 0; shift < 32; shift += 8)
+      CountingSortByByte(array, shift);
+  }
+
+  private static void CountingSortByByte(uint[] array, int shift)
+  {
+    var n = array.Length;
+    var output = new uint[n];
+    var count = new int[256];
+
+    for (var i = 0; i < n; i++)
+      count[(array[i] >> shift) & 0xFF]++;
+
+    for (var i = 1; i < 256; i++)
+      count[i] += count[i - 1];
+
+    for (var i = n - 1; i >= 0; i--)
+    {
+      var bucket = (array[i] >> shift) & 0xFF;
+      output[--count[bucket]] = array[i];
+    }
+
+    Array.Copy(output, array, n);
   }
 
   [MethodImpl(MethodImplOptions.AggressiveInlining)]

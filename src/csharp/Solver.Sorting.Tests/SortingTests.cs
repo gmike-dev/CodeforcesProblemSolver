@@ -11,6 +11,7 @@ public class SortingTests
     yield return [-1, -99];
     yield return [1, 5, -10];
     yield return [6, 5, 4, 1, 2, 3];
+    yield return [1, 7, 7, -9, 5, -3, -2, 1, 0, 4, 0];
   }
 
   [TestCaseSource(nameof(GetTestArrays))]
@@ -43,6 +44,22 @@ public class SortingTests
     TestSort(array, Sorting.ShellSort);
   }
 
+  [TestCaseSource(nameof(GetTestArrays))]
+  public void RadixSortTest(int[] array)
+  {
+    TestSort(array, Sorting.RadixSort);
+  }
+
+  [TestCase(new uint[] { 5, 1, 6, 7, 9, 32, 3, 5, 0, 5, 6, 78, 23, 89 })]
+  [TestCase(new uint[] { })]
+  [TestCase(new uint[] { 1 })]
+  [TestCase(new uint[] { 6, 5, 4, 1, 2, 3 })]
+  [TestCase(new uint[] { uint.MaxValue, uint.MinValue, 10, uint.MinValue })]
+  public void RadixSortUintTest(uint[] array)
+  {
+    TestSort(array, Sorting.RadixSort);
+  }
+
   [TestCase(new[] { 2, 0, 2, 1, 1, 0 }, 1, new[] { 0, 0, 1, 1, 2, 2 })]
   [TestCase(new[] { 2, 0, 1 }, 1, new[] { 0, 1, 2 })]
   [TestCase(new[] { 1, 2 }, 1, new[] { 1, 2 })]
@@ -53,7 +70,7 @@ public class SortingTests
     a.Should().BeEquivalentTo(expected, o => o.WithStrictOrdering());
   }
 
-  private static void TestSort(int[] a, Action<int[]> sort)
+  private static void TestSort<T>(T[] a, Action<T[]> sort)
   {
     var expected = a.OrderBy(x => x).ToArray();
     sort(a);
