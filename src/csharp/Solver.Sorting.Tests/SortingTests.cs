@@ -60,14 +60,17 @@ public class SortingTests
     TestSort(array, Sorting.RadixSort);
   }
 
-  [TestCase(new[] { 2, 0, 2, 1, 1, 0 }, 1, new[] { 0, 0, 1, 1, 2, 2 })]
-  [TestCase(new[] { 2, 0, 1 }, 1, new[] { 0, 1, 2 })]
-  [TestCase(new[] { 1, 2 }, 1, new[] { 1, 2 })]
-  [TestCase(new[] { 6, 1, 0, 1, 2, 3 }, 2, new[] { 1, 0, 1, 2, 3, 6 })]
-  public void TreeWayPartitionTest(int[] a, int mid, int[] expected)
+  [TestCase(new[] { 2, 0, 2, 1, 1, 0 }, 1, new[] { 0, 0, 1, 1, 2, 2 }, 1, 3)]
+  [TestCase(new[] { 2, 0, 1 }, 1, new[] { 0, 1, 2 }, 0, 1)]
+  [TestCase(new[] { 1, 2 }, 1, new[] { 1, 2 }, -1, 0)]
+  [TestCase(new[] { 6, 1, 0, 1, 2, 3 }, 2, new[] { 1, 0, 1, 2, 3, 6 }, 2, 3)]
+  public void TreeWayPartitionTest(int[] a, int pivot, int[] expected, 
+    int firstGroupEndIndex, int secondGroupEndIndex)
   {
-    Sorting.TreeWayPartition(a, mid);
+    var (i, j) = Sorting.TreeWayPartition(a, 0, a.Length - 1, pivot);
     a.Should().BeEquivalentTo(expected, o => o.WithStrictOrdering());
+    i.Should().Be(firstGroupEndIndex);
+    j.Should().Be(secondGroupEndIndex);
   }
 
   private static void TestSort<T>(T[] a, Action<T[]> sort)

@@ -93,28 +93,29 @@ public static class Sorting
   /// Dutch national flag problem
   /// https://en.wikipedia.org/wiki/Dutch_national_flag_problem
   /// </summary>
-  public static void TreeWayPartition(int[] a, int mid)
+  public static (int, int) TreeWayPartition(int[] a, int l, int r, int pivot)
   {
-    var n = a.Length;
-    var (i, j, k) = (0, 0, n - 1);
-    while (j <= k)
+    var k = l;
+    while (k <= r)
     {
-      if (a[j] < mid)
+      if (a[k] < pivot)
       {
-        Swap(a, i, j);
-        i++;
-        j++;
+        Swap(a, k, l);
+        l++;
+        k++;
       }
-      else if (a[j] > mid)
+      else if (a[k] > pivot)
       {
-        Swap(a, j, k);
-        k--;
+        Swap(a, k, r);
+        r--;
       }
       else
       {
-        j++;
+        k++;
       }
     }
+
+    return (l - 1, r);
   }
 
   public static void ShellSort(int[] a)
