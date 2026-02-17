@@ -173,4 +173,22 @@ public class BitmasksTests
       Bitmasks.InvertCase(c).Should().Be(char.ToLower(c));
     }
   }
+
+  [TestCase(0b00101, 0b00110)]
+  [TestCase(0b00001, 0b00010)]
+  [TestCase(0b00110, 0b01001)]
+  public void GosperCombinations_NextCombinationTest(int mask, int expected)
+  {
+    Bitmasks.GosperCombinations.NextCombination(mask).Should().Be(expected);
+  }
+
+  [TestCase(5, 1, new[] { 0b00001, 0b00010, 0b00100, 0b01000, 0b10000 })]
+  [TestCase(3, 2, new[] { 0b011, 0b101, 0b110 })]
+  [TestCase(3, 3, new[] { 0b111 })]
+  public void GosperCombinations_GenerateTest(int n, int k, int[] expected)
+  {
+    Bitmasks.GosperCombinations.Generate(n, k)
+      .Should()
+      .BeEquivalentTo(expected, o => o.WithStrictOrdering());
+  }
 }

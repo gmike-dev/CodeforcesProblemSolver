@@ -7,7 +7,7 @@ public static class Bitmasks
   /// </summary>
   public static int HammingWeight(uint n)
   {
-    int count = 0;
+    var count = 0;
     while (n != 0)
     {
       n &= (n - 1);
@@ -158,7 +158,7 @@ public static class Bitmasks
   /// </summary>
   public static uint GrayToBinary(uint num)
   {
-    uint mask = num;
+    var mask = num;
     while (mask != 0)
     {
       mask >>= 1;
@@ -172,4 +172,49 @@ public static class Bitmasks
   /// Invert case of ASCII character.
   /// </summary>
   public static char InvertCase(char c) => (char)(c ^ 32);
+  
+  /// <summary>
+  /// Gosper’s hack subset enumeration.
+  /// </summary>
+  public static class GosperCombinations
+  {
+    /// <summary>
+    /// Returns the next bit mask with the same number of set bits (Gosper's hack).
+    /// The input mask must be non-zero and represent a valid combination.
+    /// If there is no next mask within the given bit width, the result may overflow.
+    /// </summary>
+    public static int NextCombination(int mask)
+    {
+      // m: 1011100
+      // c: 0000100
+      // r: 1100000
+      // r ^ m: 0111100
+      // >> 2: 0001111
+      // / c: 0000011 - division by 2^k == right shift by k (and c = 2^2)
+      // | r: 1110011
+      var c = mask & -mask; // least significant 1-bit (LSb)
+      var r = mask + c;
+      return (((r ^ mask) >> 2) / c) | r;
+    }
+
+    /// <summary>
+    /// Generates all combinations C(n, k) as bit masks.
+    /// Each mask has exactly k bits set among n bits.
+    /// The masks are returned in increasing lexicographic order.
+    /// </summary>
+    public static IEnumerable<int> Generate(int n, int k)
+    {
+      if (k < 0 || k > n)
+        yield break;
+
+      var mask = (1 << k) - 1;
+      var limit = 1 << n;
+
+      while (mask < limit)
+      {
+        yield return mask;
+        mask = NextCombination(mask);
+      }
+    }
+  }
 }
