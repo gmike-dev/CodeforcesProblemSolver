@@ -45,6 +45,12 @@ public class SortingTests
   }
 
   [TestCaseSource(nameof(GetTestArrays))]
+  public void MergeSortTest(int[] array)
+  {
+    TestSort(array, Sorting.MergeSort);
+  }
+
+  [TestCaseSource(nameof(GetTestArrays))]
   public void RadixSortTest(int[] array)
   {
     TestSort(array, Sorting.RadixSort);

@@ -177,6 +177,52 @@ public static class Sorting
     Array.Copy(output, array, n);
   }
 
+  public static void MergeSort(int[] a)
+  {
+    Merge(0, a.Length);
+    return;
+
+    void Merge(int l, int r)
+    {
+      var n = r - l;
+      if (n < 2)
+      {
+        return;
+      }
+
+      var m = l + n / 2;
+      Merge(l, m);
+      Merge(m, r);
+      var i = l;
+      var j = m;
+      var k = 0;
+      var temp = new int[n];
+      while (i < m && j < r)
+      {
+        if (a[i] < a[j])
+        {
+          temp[k++] = a[i++];
+        }
+        else
+        {
+          temp[k++] = a[j++];
+        }
+      }
+
+      while (i < m)
+      {
+        temp[k++] = a[i++];
+      }
+
+      while (j < r)
+      {
+        temp[k++] = a[j++];
+      }
+
+      temp.CopyTo(a, l);
+    }
+  }
+
   [MethodImpl(MethodImplOptions.AggressiveInlining)]
   private static void Swap(int[] a, int i, int j)
   {
