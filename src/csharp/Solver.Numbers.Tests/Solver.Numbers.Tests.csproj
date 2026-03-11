@@ -1,0 +1,5 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup>
+    <ProjectReference Include="..\Solver.Numbers\Solver.Numbers.csproj" />
+  </ItemGroup>
+</Project>

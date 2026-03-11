@@ -1,4 +1,4 @@
-﻿namespace Solver.Utils;
+﻿namespace Solver.Numbers;
 
 public static class Bitmasks
 {

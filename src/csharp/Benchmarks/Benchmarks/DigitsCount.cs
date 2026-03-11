@@ -1,5 +1,5 @@
 ﻿using BenchmarkDotNet.Attributes;
-using Solver.Utils;
+using Solver.Numbers;
 
 namespace Benchmarks.Benchmarks;
 

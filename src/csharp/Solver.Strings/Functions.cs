@@ -1,6 +1,6 @@
-﻿using Solver.Utils;
+﻿namespace Solver.Strings;
 
-namespace Solver.Strings;
+using Numbers;
 
 public static class Functions
 {

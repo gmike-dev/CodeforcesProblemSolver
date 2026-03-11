@@ -1,5 +1,5 @@
 ﻿using BenchmarkDotNet.Attributes;
-using Solver.Utils;
+using Solver.Numbers;
 
 namespace Benchmarks.Benchmarks;
 
@@ -12,24 +12,24 @@ public class Eratosthenes
   [Benchmark(Baseline = true)]
   public IReadOnlyList<int> Sieve()
   {
-    return Numbers.Sieve(N);
+    return Primes.Sieve(N);
   }
   
   [Benchmark]
   public IReadOnlyList<int> BitSieve()
   {
-    return Numbers.BitSieve(N);
+    return Primes.BitSieve(N);
   }
   
   [Benchmark]
   public IReadOnlyList<int> EnhancedSieve()
   {
-    return Numbers.EnhancedSieve(N);
+    return Primes.EnhancedSieve(N);
   }
   
   [Benchmark]
   public IReadOnlyList<int> LinearSieve()
   {
-    return Numbers.LinearSieve(N);
+    return Primes.LinearSieve(N);
   }
 }

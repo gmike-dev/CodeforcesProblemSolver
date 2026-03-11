@@ -1,0 +1,5 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup>
+    <ProjectReference Include="..\Solver.DataStructures\Solver.DataStructures.csproj" />
+  </ItemGroup>
+</Project>

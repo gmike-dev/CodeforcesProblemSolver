@@ -1,4 +1,4 @@
-﻿namespace Solver.Utils.Tests;
+﻿namespace Solver.Numbers.Tests;
 
 [TestFixture]
 public class BitmasksTests
