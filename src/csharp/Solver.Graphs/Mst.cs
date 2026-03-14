@@ -24,6 +24,7 @@ public static class Mst
       if (dsu.Union(edge.From, edge.To))
         weight += edge.Weight;
     }
+
     return dsu.Count > 1 ? -1 : weight; // -1 if graph is not connected
   }
 
@@ -47,6 +48,7 @@ public static class Mst
         if (!used[j] && (v == -1 || min[j] < min[v]))
           v = j;
       }
+
       result += min[v];
       used[v] = true;
       for (var j = 0; j < n; j++)
@@ -55,6 +57,39 @@ public static class Mst
           min[j] = g[v][j];
       }
     }
+
     return result;
+  }
+
+  /// <summary>
+  /// Prim's algorithm for finding a minimum spanning tree (MST) weight.
+  /// </summary>
+  public static long Prim(List<(int v, int weight)>[] g)
+  {
+    int n = g.Length;
+    var used = new bool[n];
+    var pq = new PriorityQueue<int, int>();
+    pq.Enqueue(0, 0);
+    long mst = 0;
+    while (pq.TryDequeue(out int v, out int w))
+    {
+      if (used[v])
+      {
+        continue;
+      }
+
+      used[v] = true;
+      mst += w;
+
+      foreach (var (to, weight) in g[v])
+      {
+        if (!used[to])
+        {
+          pq.Enqueue(to, weight);
+        }
+      }
+    }
+
+    return mst;
   }
 }
