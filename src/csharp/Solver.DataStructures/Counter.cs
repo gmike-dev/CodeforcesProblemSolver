@@ -1,11 +1,14 @@
-﻿namespace Solver.Utils;
+﻿namespace Solver.DataStructures;
 
 public static class Counter
 {
   public static int IncCount<T>(IDictionary<T, int> counter, T item)
   {
     if (counter.TryGetValue(item, out var count))
+    {
       return (counter[item] = count + 1);
+    }
+
     counter.Add(item, 1);
     return 1;
   }
@@ -13,11 +16,18 @@ public static class Counter
   public static void DecCount<T>(IDictionary<T, int> counter, T item)
   {
     if (!counter.TryGetValue(item, out var count))
+    {
       return;
+    }
+
     if (count == 1)
+    {
       counter.Remove(item);
+    }
     else
+    {
       counter[item] = count - 1;
+    }
   }
 
   public static int GetCount<T>(IDictionary<T, int> counter, T item)
@@ -29,7 +39,10 @@ public static class Counter
   {
     var c = new Dictionary<T, int>();
     foreach (var t in a)
+    {
       IncCount(c, t);
+    }
+
     return c;
   }
 }

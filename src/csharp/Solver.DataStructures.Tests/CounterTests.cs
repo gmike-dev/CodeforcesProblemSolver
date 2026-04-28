@@ -1,4 +1,4 @@
-﻿namespace Solver.Utils.Tests;
+﻿namespace Solver.DataStructures.Tests;
 
 [TestFixture]
 public class CounterTests

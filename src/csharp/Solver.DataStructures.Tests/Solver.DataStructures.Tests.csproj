@@ -4,5 +4,6 @@
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\Solver.DataStructures\Solver.DataStructures.csproj"/>
+    <ProjectReference Include="..\Solver.Utils\Solver.Utils.csproj" />
   </ItemGroup>
 </Project>
